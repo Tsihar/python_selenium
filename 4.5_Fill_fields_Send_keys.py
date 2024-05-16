@@ -1,4 +1,4 @@
-# import time
+import time
 
 # from selenium import webdriver
 # from selenium.webdriver.common.by import By
@@ -18,11 +18,12 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option("detach", True)
-g = Service()
-driver = webdriver.Chrome(options=options, service=g)
+# options = webdriver.ChromeOptions()
+# options.add_experimental_option("detach", True)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 base_url = 'https://www.saucedemo.com/'
 driver.get(base_url)
 driver.maximize_window()
@@ -30,6 +31,6 @@ driver.maximize_window()
 user_name = driver.find_element(by=By.ID, value="user-name")
 user_name.send_keys("standard_user")
 
-# time.sleep(2)
-# driver.close()
+time.sleep(2)
+driver.close()
 
