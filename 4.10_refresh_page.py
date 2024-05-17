@@ -2,11 +2,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option("detach", True)
-g = Service()
-driver = webdriver.Chrome(options=options, service=g)
+service = Service(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
 base_url = 'https://www.saucedemo.com/'
 driver.get(base_url)
 driver.maximize_window()
@@ -27,8 +26,12 @@ print("click login button")
 warning_login = driver.find_element(by=By.XPATH, value="//*[@id='login_button_container']")
 warning_message_login = warning_login.text
 
+# assert валидация
+# 1 варик
 assert warning_message_login == "Epic sadface: Username and password do not match any user in this service"
-print("Correct")
+# print("Correct")
 
+# 2 варик, если false, то выведется AssertionError: Не верная ошибка
+assert warning_message_login == "Epic1 sadface: Username and password do not match any user in this service", "Не верная ошибка"
 # рефрещнем страницу для очистки полей логина и пароля
 driver.refresh()
