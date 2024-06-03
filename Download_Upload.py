@@ -13,11 +13,11 @@ from selenium.webdriver import Keys
 
 options = webdriver.ChromeOptions()
 prefs = {
-    "download.default_directory": f"{os.getcwd()}\downloads"
+    "download.default_directory": f"{os.getcwd()}\downloads" # спец параметр для установки места скачивания локально на компе
 } # os.getcwd() - возвращает текущую директорию
-options.add_experimental_option("prefs", prefs)
+options.add_experimental_option("prefs", prefs) # добавление prefs в опции
 service = Service(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
+driver = webdriver.Chrome(service=service, options=options) # передача опций в драйвер
 base_url = 'https://the-internet.herokuapp.com/download'
 driver.get(base_url)
 print(os.getcwd())
