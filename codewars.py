@@ -172,3 +172,41 @@ def duplicate_count(text):
 
 
 print(duplicate_count("abcdeaB"))
+
+# There is an array with some numbers. All numbers are equal except for one. Try to find it!
+# The tests contain some very huge arrays, so think about !performance!.
+
+# def find_uniq(arr):
+#     arr.sort()
+#     if arr[0] == arr[1]:
+#         return arr[-1]
+#     else:
+#         return arr[0]
+
+# def find_uniq(arr):
+#     a, b = set(arr)
+#     return a if arr.count(a) == 1 else b
+
+# Збс варик ниже
+# def find_uniq(arr):
+#     return min(set(arr), key=arr.count)
+
+def find_uniq(arr):
+    arr.sort()
+    return arr[-1] if arr[0] == arr[-1] else arr[0]
+
+print(find_uniq([2, 3, 3, 3, 3, 3]))
+
+# Учитывая два массива a и b, напишите функцию comp(a, b) (илиcompSame(a, b)),
+# которая проверяет, имеют ли два массива «одинаковые» элементы с одинаковой кратностью
+# (кратность члена — это количество раз оно появляется). «То же самое» здесь означает,
+# что элементы в b являются элементами в квадрате, независимо от порядка.
+
+def comp(array1, array2):
+    try:
+        return sorted([i ** 2 for i in array1]) == sorted(array2)
+    except:
+        return False
+
+print(comp([2, 2, 3], [4, 9, 9]))
+
