@@ -19,41 +19,42 @@ prefs = {
     "download.default_directory": f"{os.getcwd()}\downloads" # спец параметр для установки места скачивания локально на компе
 } # os.getcwd() - возвращает текущую директорию
 options.add_experimental_option("prefs", prefs) # добавление prefs в опции
-service = Service(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options) # передача опций в драйвер
+# эксперим опции для того, чтоб в них добавлять свои кастомные опции драйвера (опции добавления директории из коробки нет)
 
-# base_url_download = 'https://the-internet.herokuapp.com/download'
-# base_url_upload = 'https://the-internet.herokuapp.com/upload'
-# driver.get(base_url_download)
-# print(os.getcwd())
-# time.sleep(3)
-#
-# # download
-# driver.find_elements('xpath', '//a')[3].click()
-#
-# time.sleep(3)
-#
-# driver.get(base_url_upload)
-#
-# # upload
-# time.sleep(3)
-# upload_field = driver.find_element('xpath', '//input[@type="file"]')
-# upload_field.send_keys(f'{os.getcwd()}/downloads/upload.py')
-#
-# time.sleep(3)
+driver = webdriver.Chrome(options=options) # передача опций в драйвер
 
-base_url = ''
-driver.get(base_url)
-
-
-widget_frame = WebDriverWait(driver, 15).until(EC.visibility_of_element_located(("xpath", '//iframe[@name="sh-widget"]')),
-                                                      message=f"Can't find visible element by locator")(("xpath", '//iframe[@name="sh-widget"]'))
-time.sleep(6)
-widget_button = driver.find_element('xpath', '//button[contains(@class,"mantine-ActionIcon-root")]')
-widget_button.click()
+base_url_download = 'https://the-internet.herokuapp.com/download'
+base_url_upload = 'https://the-internet.herokuapp.com/upload'
+driver.get(base_url_download)
+print(os.getcwd())
 time.sleep(3)
 
-upload_field = driver.find_element('xpath', '//input[@type="file"]')
-upload_field.send_keys(f'{os.getcwd()}/downloads/Blackhole.png')
+# download
+driver.find_elements('xpath', '//a')[3].click()
 
-time.sleep(5)
+time.sleep(3)
+
+driver.get(base_url_upload)
+
+# upload
+time.sleep(3)
+upload_field = driver.find_element('xpath', '//input[@type="file"]')
+upload_field.send_keys(f'{os.getcwd()}/downloads/upload.py')
+
+time.sleep(3)
+
+# base_url = ''
+# driver.get(base_url)
+#
+#
+# widget_frame = WebDriverWait(driver, 15).until(EC.visibility_of_element_located(("xpath", '//iframe[@name="sh-widget"]')),
+#                                                       message=f"Can't find visible element by locator")(("xpath", '//iframe[@name="sh-widget"]'))
+# time.sleep(6)
+# widget_button = driver.find_element('xpath', '//button[contains(@class,"mantine-ActionIcon-root")]')
+# widget_button.click()
+# time.sleep(3)
+#
+# upload_field = driver.find_element('xpath', '//input[@type="file"]')
+# upload_field.send_keys(f'{os.getcwd()}/downloads/Blackhole.png')
+#
+# time.sleep(5)
