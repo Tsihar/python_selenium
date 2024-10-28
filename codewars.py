@@ -258,3 +258,14 @@ def solution(v, u):
     return units["G"] * m1 * m2 / r**2
 
 print(solution([1000, 1000, 100], ["g", "kg", "m"]))
+
+def sum_array(arr):
+    return sum(sorted(arr)[1:-1]) if arr else 0
+
+print(sum_array([]))
+arr = []
+print(arr)
+
+if arr:
+    b = 1
+    print(b)
